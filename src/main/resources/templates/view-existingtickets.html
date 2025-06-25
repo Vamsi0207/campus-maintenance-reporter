@@ -161,7 +161,6 @@
     <a th:href="@{/home}" class="home-link">Home</a>
   </header>
 
-
   <main>
     <h2>All Tickets</h2>
     <table>
@@ -176,7 +175,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr th:each="ticket : ${tickets}">
+<tr th:each="ticket : ${tickets}">
           <td th:text="${ticket.type}">Type</td>
           <td th:text="${ticket.description}">Description</td>
           <td>
