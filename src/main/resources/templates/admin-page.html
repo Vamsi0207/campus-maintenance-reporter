@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #fff;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo {
+      height: 40px;
+    }
+
+    .title {
+      font-size: 16px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .logout-form button {
+      background-color: #2563eb;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .logout-form button:hover {
+      background-color: #1d4ed8;
+    }
+
+    .container {
+      max-width: 100%;
+      margin: 20px auto;
+      padding: 10px 20px;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 18px;
+      margin-bottom: 15px;
+      color: #222;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    th, td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+      vertical-align: middle;
+    }
+
+    th {
+      background-color: #f0f0f0;
+      font-weight: bold;
+    }
+
+    tr:hover {
+      background-color: #f9f9f9;
+    }
+
+    img.ticket-image {
+      max-width: 80px;
+      border-radius: 4px;
+    }
+
+    select {
+      font-size: 13px;
+      padding: 5px;
+      margin-right: 4px;
+    }
+
+    .submit-btn {
+      font-size: 13px;
+      padding: 5px 10px;
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    .submit-btn:hover {
+      background-color: #1e40af;
+    }
+
+    .status-label {
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-weight: bold;
+      display: inline-block;
+    }
+
+    .status-pending {
+      background-color: #fef08a;
+      color: #92400e;
+    }
+
+    .status-inprogress {
+      background-color: #bae6fd;
+      color: #075985;
+    }
+
+    .status-resolved {
+      background-color: #bbf7d0;
+      color: #166534;
+    }
+
+    @media (max-width: 768px) {
+      th, td {
+        font-size: 12px;
+        padding: 6px 8px;
+      }
+
+      .submit-btn,
+      select {
+        font-size: 11px;
+      }
+
+      img.ticket-image {
+        max-width: 60px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <img src="https://iith.ac.in/assets/images/logo.png" alt="Logo" class="logo" />
+    <div class="title">IIT Hyderabad - Admin Portal</div>
+  </div>
+  <form th:action="@{/logout}" method="post" class="logout-form">
+    <button type="submit">Logout</button>
+  </form>
+</header>
+
+<div class="container">
+  <h2>Admin Ticket Dashboard</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Email</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Image</th>
+        <th>Status</th>
+        <th>Created</th>
+        <th>Updated</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="ticket : ${tickets}">
+        <td th:text="${ticket.id}"></td>
+        <td th:text="${ticket.user.email}"></td>
+        <td th:text="${ticket.type}"></td>
+        <td th:text="${ticket.description}"></td>
+        <td>
+          <img th:if="${ticket.imagePath != null}" th:src="@{${ticket.imagePath}}" class="ticket-image" />
+          <span th:if="${ticket.imagePath == null}">No image</span>
+        </td>
+        <td>
+          <form th:action="@{/updateStatus}" method="post" style="display: flex; align-items: center;">
+            <input type="hidden" name="id" th:value="${ticket.id}" />
+            <select name="status">
+              <option disabled selected th:text="${ticket.status}"></option>
+              <option value="Pending">Pending</option>
+              <option value="InProgress">In Progress</option>
+              <option value="Resolved">Resolved</option>
+            </select>
+            <button type="submit" class="submit-btn">Update</button>
+          </form>
+          <div th:switch="${ticket.status}">
+            <span th:case="'Pending'" class="status-label status-pending">Pending</span>
+            <span th:case="'InProgress'" class="status-label status-inprogress">In Progress</span>
+            <span th:case="'Resolved'" class="status-label status-resolved">Resolved</span>
+          </div>
+        </td>
+        <td th:text="${#temporals.format(ticket.createdAt, 'yy-MM-dd HH:mm')}"></td>
+        <td th:text="${#temporals.format(ticket.updatedAt, 'yy-MM-dd HH:mm')}"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>

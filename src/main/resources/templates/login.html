@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+    }
+
+    .login-box {
+      width: 400px;
+      padding: 40px;
+      background-color: rgba(255, 255, 255, 0.95);
+      border-radius: 15px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+
+    .login-box img {
+      width: 60px;
+      margin-bottom: 15px;
+    }
+
+    .login-box h1 {
+      margin-bottom: 25px;
+      color: #333;
+      font-size: 28px;
+      font-weight: 600;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      text-align: left;
+      color: #444;
+      font-weight: 500;
+    }
+
+    input[type=email],
+    input[type=password] {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-bottom: 15px;
+      box-sizing: border-box;
+      transition: border 0.3s, box-shadow 0.3s;
+    }
+
+    input[type=email]:focus,
+    input[type=password]:focus {
+      border-color: #4CAF50;
+      box-shadow: 0 0 6px rgba(76, 175, 80, 0.3);
+      outline: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #388e3c;
+      transform: scale(1.02);
+    }
+
+    .login-footer {
+      font-size: 12px;
+      color: #888;
+      margin-top: 15px;
+    }
+
+    .login-footer a {
+      color: #4CAF50;
+      text-decoration: none;
+    }
+
+    @media (max-width: 500px) {
+      .login-box {
+        width: 90%;
+        padding: 30px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="login-box">
+
+    <img src="/logo.png" alt="Logo" />
+
+    <h1>Login</h1>
+    <p th:if="${param.error}" style="color: red;">Invalid username or password</p>
+  <form method="post" th:action="@{/login/save}">
+  <label for="username">Email</label>
+  <input type="email" name="username" id="username" required />
+
+  <label for="password">Password</label>
+  <input type="password" name="password" id="password" required />
+
+  <button type="submit">Login</button>
+</form>
+<div style="margin-top: 15px;">
+  <a th:href="@{/changepassword}" style="margin-right: 15px;">Change password?</a>
+  <a th:href="@{/forgotpassword}">Forgot password?</a>
+</div>
+
+
+    
+  </div>
+</body>
+</html>

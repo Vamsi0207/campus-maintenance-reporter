@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>All Tickets</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #e3f2fd, #bbdefb);
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: white;
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .header-left img {
+      height: 60px;
+    }
+
+    .portal-title {
+      font-size: 22px;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+
+    .home-link {
+      text-decoration: none;
+      background-color: #2563eb;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    .home-link:hover {
+      background-color: #1e40af;
+    }
+
+    main {
+      padding: 40px 20px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 30px;
+      font-size: 26px;
+    }
+
+    table {
+      width: 95%;
+      margin: auto;
+      border-collapse: separate;
+      border-spacing: 0 10px;
+    }
+
+    thead {
+      background-color: #1976d2;
+      color: white;
+    }
+
+    th {
+      padding: 14px;
+      text-align: left;
+      font-weight: 600;
+      border-radius: 6px 6px 0 0;
+    }
+
+    tbody tr {
+      background-color: white;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      border-radius: 10px;
+      transition: transform 0.2s ease;
+    }
+
+    tbody tr:hover {
+      transform: scale(1.01);
+    }
+
+    td {
+      padding: 14px 18px;
+      color: #333;
+      vertical-align: middle;
+    }
+
+    td img {
+      max-width: 90px;
+      height: auto;
+      border-radius: 6px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    td span {
+      color: #999;
+      font-style: italic;
+    }
+
+    @media (max-width: 768px) {
+      .portal-title {
+        font-size: 18px;
+      }
+
+      .home-link {
+        font-size: 14px;
+        padding: 8px 14px;
+      }
+
+      th, td {
+        font-size: 14px;
+      }
+
+      td img {
+        max-width: 60px;
+      }
+
+      table {
+        width: 100%;
+      }
+
+      main {
+        padding: 20px 10px;
+      }
+
+      h2 {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-left">
+      <img src="https://iith.ac.in/assets/images/logo.png" alt="IIT Hyderabad Logo" />
+      <div class="portal-title">IIT Hyderabad - Maintenance Portal</div>
+    </div>
+    <a th:href="@{/home}" class="home-link">Home</a>
+  </header>
+
+
+  <main>
+    <h2>All Tickets</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Image</th>
+          <th>Status</th>
+          <th>Created On</th>
+          <th>Updated On</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="ticket : ${tickets}">
+          <td th:text="${ticket.type}">Type</td>
+          <td th:text="${ticket.description}">Description</td>
+          <td>
+            <img th:if="${ticket.imagePath != null}" th:src="@{${ticket.imagePath}}" alt="Ticket Image" />
+            <span th:if="${ticket.imagePath == null}">No image</span>
+          </td>
+          <td th:text="${ticket.status}">Status</td>
+          <td th:text="${#temporals.format(ticket.createdAt, 'dd-MM-yyyy HH:mm')}">Created Date</td>
+          <td th:text="${#temporals.format(ticket.updatedAt, 'dd-MM-yyyy HH:mm')}">Updated Date</td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+
+</body>
+</html>
