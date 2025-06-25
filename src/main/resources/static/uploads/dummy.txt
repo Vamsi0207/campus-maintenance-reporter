@@ -1,0 +1,1 @@
+upload folder should be created to store uploaded photos
