@@ -16,12 +16,12 @@
       flex-direction: column;
     }
 
-    .logo {
+    .logo-text {
       margin-bottom: 20px;
-    }
-
-    .logo img {
-      height: 80px;
+      font-size: 28px;
+      font-weight: 700;
+      color: #0056b3;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
     }
 
     .form-container {
@@ -94,16 +94,17 @@
       button {
         font-size: 15px;
       }
+
+      .logo-text {
+        font-size: 22px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <div class="logo">
-    <img src="https://iith.ac.in/assets/images/logo.png" alt="IIT Hyderabad Logo" />
-  </div>
-
+  <div class="logo-text">ABC College - Maintenance Portal</div>
 
   <div class="form-container">
     <h2>Raise a Ticket</h2>
@@ -125,5 +126,6 @@
       <button type="submit">Submit</button>
     </form>
   </div>
+
 </body>
 </html>

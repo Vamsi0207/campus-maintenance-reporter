@@ -7,21 +7,23 @@
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: #f4f6f8;
+      background: linear-gradient(135deg, #e3f2fd, #bbdefb);
       margin: 0;
       padding: 0;
     }
 
     header {
-      background-color: #fff;
+      background-color: #1976d2;
       padding: 10px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
       position: sticky;
       top: 0;
       z-index: 1000;
+      color: white;
+      position: relative;
     }
 
     .header-left {
@@ -31,17 +33,21 @@
     }
 
     .logo {
-      height: 40px;
+      height: 50px;
+      width: auto;
     }
 
-    .title {
-      font-size: 16px;
+    .title-center {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 20px;
       font-weight: bold;
-      color: #333;
+      color: white;
     }
 
     .logout-form button {
-      background-color: #2563eb;
+      background-color: #ef5350;
       color: white;
       padding: 8px 16px;
       border: none;
@@ -51,7 +57,7 @@
     }
 
     .logout-form button:hover {
-      background-color: #1d4ed8;
+      background-color: #c62828;
     }
 
     .container {
@@ -62,36 +68,47 @@
 
     h2 {
       text-align: center;
-      font-size: 18px;
-      margin-bottom: 15px;
-      color: #222;
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #0d47a1;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
       font-size: 14px;
-    }
-
-    th, td {
-      padding: 10px 12px;
-      border-bottom: 1px solid #ddd;
-      text-align: left;
-      vertical-align: middle;
+      background-color: white;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
     th {
-      background-color: #f0f0f0;
+      background-color: #2196f3;
+      color: white;
       font-weight: bold;
+      padding: 10px 12px;
+    }
+
+    td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #ddd;
+      vertical-align: middle;
+      color: #333;
     }
 
     tr:hover {
-      background-color: #f9f9f9;
+      background-color: #e3f2fd;
     }
 
     img.ticket-image {
-      max-width: 80px;
-      border-radius: 4px;
+      max-width: 150px;
+      max-height: 120px;
+      object-fit: cover;
+      border-radius: 6px;
+      display: block;
+      margin: auto;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     }
 
     select {
@@ -103,7 +120,7 @@
     .submit-btn {
       font-size: 13px;
       padding: 5px 10px;
-      background-color: #2563eb;
+      background-color: #4caf50;
       color: white;
       border: none;
       border-radius: 3px;
@@ -111,7 +128,7 @@
     }
 
     .submit-btn:hover {
-      background-color: #1e40af;
+      background-color: #2e7d32;
     }
 
     .status-label {
@@ -123,18 +140,18 @@
     }
 
     .status-pending {
-      background-color: #fef08a;
-      color: #92400e;
+      background-color: #fff59d;
+      color: #f57f17;
     }
 
     .status-inprogress {
-      background-color: #bae6fd;
-      color: #075985;
+      background-color: #81d4fa;
+      color: #0277bd;
     }
 
     .status-resolved {
-      background-color: #bbf7d0;
-      color: #166534;
+      background-color: #a5d6a7;
+      color: #2e7d32;
     }
 
     @media (max-width: 768px) {
@@ -149,7 +166,12 @@
       }
 
       img.ticket-image {
-        max-width: 60px;
+        max-width: 100px;
+        max-height: 80px;
+      }
+
+      .title-center {
+        font-size: 16px;
       }
     }
   </style>
@@ -158,9 +180,9 @@
 
 <header>
   <div class="header-left">
-    <img src="https://iith.ac.in/assets/images/logo.png" alt="Logo" class="logo" />
-    <div class="title">IIT Hyderabad - Admin Portal</div>
+   
   </div>
+  <div class="title-center">ABC College - Maintenance Portal</div>
   <form th:action="@{/logout}" method="post" class="logout-form">
     <button type="submit">Logout</button>
   </form>
@@ -188,8 +210,12 @@
         <td th:text="${ticket.type}"></td>
         <td th:text="${ticket.description}"></td>
         <td>
-          <img th:if="${ticket.imagePath != null}" th:src="@{${ticket.imagePath}}" class="ticket-image" />
-          <span th:if="${ticket.imagePath == null}">No image</span>
+          <div style="text-align: center;">
+            <a th:if="${ticket.imagePath != null}" th:href="@{${ticket.imagePath}}" target="_blank">
+              <img th:src="@{${ticket.imagePath}}" class="ticket-image" alt="Ticket Image" />
+            </a>
+            <span th:if="${ticket.imagePath == null}" style="color: #999; font-style: italic;">No image</span>
+          </div>
         </td>
         <td>
           <form th:action="@{/updateStatus}" method="post" style="display: flex; align-items: center;">

@@ -32,25 +32,20 @@
       background-color: white;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
       z-index: 10;
     }
 
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-
-    .logo img {
-      height: 50px;
-    }
-
     .title {
-      font-weight: 600;
-      font-size: 18px;
-      color: #2c3e50;
+      font-weight: 700;
+      font-size: 22px;
+      color: #1565c0;
+    }
+
+    .logout-form {
+      position: absolute;
+      right: 20px;
     }
 
     .logout-form button {
@@ -115,8 +110,11 @@
     @media (max-width: 600px) {
       header {
         flex-direction: column;
-        align-items: flex-start;
         gap: 10px;
+      }
+
+      .logout-form {
+        position: static;
       }
 
       .main-btn {
@@ -128,22 +126,21 @@
       .container {
         padding: 30px 20px;
       }
+
+      .title {
+        font-size: 18px;
+      }
     }
   </style>
 </head>
 <body>
 
-
   <header>
-    <div class="logo">
-      <img src="https://iith.ac.in/assets/images/logo.png" alt="IIT Hyderabad Logo" />
-      <div class="title">IIT Hyderabad - Maintenance Portal</div>
-    </div>
+    <div class="title">ABC College - Maintenance Portal</div>
     <form th:action="@{/logout}" method="post" class="logout-form">
       <button type="submit">Logout</button>
     </form>
   </header>
-
 
   <div class="main-section">
     <div class="container">

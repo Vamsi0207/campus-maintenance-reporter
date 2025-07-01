@@ -28,8 +28,12 @@
       text-align: center;
     }
 
-    .login-box img {
-      width: 60px;
+    .college-name {
+      font-size: 28px;
+      font-weight: 700;
+      background: linear-gradient(90deg, #ff5722, #ff9800, #ffc107);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       margin-bottom: 15px;
     }
 
@@ -99,6 +103,10 @@
         width: 90%;
         padding: 30px;
       }
+
+      .college-name {
+        font-size: 22px;
+      }
     }
   </style>
 </head>
@@ -106,26 +114,24 @@
 <body>
   <div class="login-box">
 
-    <img src="/logo.png" alt="Logo" />
+    <div class="college-name">ABC College</div>
 
     <h1>Login</h1>
     <p th:if="${param.error}" style="color: red;">Invalid username or password</p>
-  <form method="post" th:action="@{/login/save}">
-  <label for="username">Email</label>
-  <input type="email" name="username" id="username" required />
+    <form method="post" th:action="@{/login/save}">
+      <label for="username">Email</label>
+      <input type="email" name="username" id="username" required />
 
-  <label for="password">Password</label>
-  <input type="password" name="password" id="password" required />
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" required />
 
-  <button type="submit">Login</button>
-</form>
-<div style="margin-top: 15px;">
-  <a th:href="@{/changepassword}" style="margin-right: 15px;">Change password?</a>
-  <a th:href="@{/forgotpassword}">Forgot password?</a>
-</div>
+      <button type="submit">Login</button>
+    </form>
+    <div style="margin-top: 15px;">
+      <a th:href="@{/changepassword}" style="margin-right: 15px;">Change password?</a>
+      <a th:href="@{/forgotpassword}">Forgot password?</a>
+    </div>
 
-
-    
   </div>
 </body>
 </html>

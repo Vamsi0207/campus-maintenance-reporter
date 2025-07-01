@@ -35,14 +35,11 @@
       gap: 20px;
     }
 
-    .header-left img {
-      height: 60px;
-    }
-
     .portal-title {
-      font-size: 22px;
-      font-weight: 600;
-      color: #2c3e50;
+      font-size: 26px;
+      font-weight: 700;
+      color: #1976d2;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
     }
 
     .home-link {
@@ -121,7 +118,7 @@
 
     @media (max-width: 768px) {
       .portal-title {
-        font-size: 18px;
+        font-size: 20px;
       }
 
       .home-link {
@@ -155,8 +152,7 @@
 
   <header>
     <div class="header-left">
-      <img src="https://iith.ac.in/assets/images/logo.png" alt="IIT Hyderabad Logo" />
-      <div class="portal-title">IIT Hyderabad - Maintenance Portal</div>
+      <div class="portal-title">ABC College - Maintenance Portal</div>
     </div>
     <a th:href="@{/home}" class="home-link">Home</a>
   </header>
@@ -175,7 +171,7 @@
         </tr>
       </thead>
       <tbody>
-<tr th:each="ticket : ${tickets}">
+        <tr th:each="ticket : ${tickets}">
           <td th:text="${ticket.type}">Type</td>
           <td th:text="${ticket.description}">Description</td>
           <td>
