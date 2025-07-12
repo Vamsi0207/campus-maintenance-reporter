@@ -31,11 +31,27 @@ Administrators can view, manage, and update the status of these complaints throu
 - 🐬 MySQL  
 
 ---
+## 🔄 Demo Workflow: Student → Admin → Student
+
+1. **Student logs in and submits a complaint**  
+   - Example: "Fan not working in Room 204"  
+   - Complaint is saved with status: **Pending**
+
+2. **Admin logs in and updates status**  
+   - Admin views the complaint list  
+   - Changes the status to: **In Progress**
+
+3. **Student logs back in to check status**  
+   - Student views their complaint  
+   - Status now shows: **In Progress**
+
+---
 ## Demo
 
 👉 [Watch Demo Video](https://drive.google.com/file/d/1ggo49WWY5WaXFf2QLDQyDZVTX7bwGr5q/view?usp=drive_link)
 
 ---
+
 
 ## 🗄️ Database Setup
 
