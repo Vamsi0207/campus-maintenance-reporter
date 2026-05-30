@@ -138,9 +138,9 @@ Then open **[http://localhost:8080/login](http://localhost:8080/login)**.
 
 ## 👤 Add local users
 
-This version of the project does not include a public registration screen. Add users directly to the `users` table after the application has started once and Hibernate has created the schema.
+User registration is intentionally not enabled because this application is designed for internal organizational use. User credentials are pre-fed into the system by the organization rather than created through a public sign-up screen.
 
-Passwords must be stored as **BCrypt hashes**, not plain text:
+For local development, add users directly to the `users` table after the application has started once and Hibernate has created the schema. Passwords must be stored as **BCrypt hashes**, not plain text:
 
 ```sql
 USE project;
