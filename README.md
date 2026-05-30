@@ -142,6 +142,13 @@ Then open **[http://localhost:8080/login](http://localhost:8080/login)**.
 This application is designed for use within an organization, such as a college or university. Student and administrator accounts are **pre-registered by the organization** before users sign in. Public user registration is intentionally not enabled, which helps limit access to approved members of the organization.
 
 For local development, add representative accounts directly to the `users` table after the application has started once and Hibernate has created the schema. Passwords must be stored as **BCrypt hashes**, not plain text:
+=======
+## 👤 Add local users
+
+This version of the project does not include a public registration screen. Add users directly to the `users` table after the application has started once and Hibernate has created the schema.
+
+Passwords must be stored as **BCrypt hashes**, not plain text:
+
 
 ```sql
 USE project;
@@ -229,7 +236,7 @@ bash ./mvnw test
 
 ## 🌱 Ideas for future improvements
 
-- Add an administrator-facing account provisioning page or integrate with the organization's identity provider.
+- Add self-service registration and profile management.
 - Use secure reset tokens with expiration times for forgot-password requests.
 - Store uploads in cloud object storage.
 - Add ticket filtering, search, priority levels, and assignment to maintenance teams.
